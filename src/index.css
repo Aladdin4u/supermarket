@@ -1,0 +1,146 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #f1f1f1;
+  font-family: sans-serif;
+}
+a {
+  text-decoration: none;
+}
+nav {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 40px 25px;
+  height: 60px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+}
+.content {
+  margin: 20px;
+}
+.ui-section {
+  display: flex;
+  padding: 0 20px;
+}
+.ui-section > div {
+  margin: 0 10px;
+}
+.ui-product-list {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+  border-radius: 10px;
+}
+.ui-product {
+  display: flex;
+  background-color: white;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+  padding: 0 4px;
+}
+.ui-product > div {
+  margin: 10px;
+}
+.ui-text {
+  align-self: flex-start;
+}
+.ui-text > p {
+  margin: 0;
+}
+.ui-btn {
+  width: 50px;
+  height: 30px;
+  align-self: flex-end;
+  margin-bottom: 15px;
+  text-align: center;
+  background-color: #1db0c4;
+  border-radius: 10px;
+  border: 1px solid #03444d;
+  padding: 4px;
+}
+.ui-img {
+  background-color: #f1f1f1;
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+}
+.ui-bold{
+  font-weight: bold;
+}
+.nav-title {
+  font-weight: bold;
+  margin-right: auto;
+}
+
+.nav--logo_text {
+  color: #4CAF50;
+  margin-right: auto;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-link {
+  margin: 10px;
+  color: lightgreen;
+  text-decoration: none;
+}
+.nav-link:active {
+  border-bottom: 2px solid white;
+}
+.ui-textfield {
+  padding: 12px 10px;
+  border-radius: 3px;
+  border: 1px solid #DADCE0;
+  font-size: 16px;
+}
+.ui-button {
+  background-color: #4CAF50;
+  color: white;
+  border: 0;
+  padding: 15px 20px;
+  min-width: 150px;
+  font-size: 16px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: opacity 200ms ease-out;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+.ui-button:hover {
+  opacity: 0.8;
+}
+.ui-button:disabled {
+  opacity: 0.4;
+  cursor: disabled;
+}
+.ui-image {
+  width: 400px;
+  height: 200px;
+  background-color: darkorange;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  color: white;
+  border-collapse: collapse;
+  margin-bottom: 25px;
+  background-image: url('/wcimage/d7b20c142069201.625ffbdb35502.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+.table-point {
+  font-weight: bold;
+}
