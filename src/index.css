@@ -54,6 +54,7 @@ body.dark {
   --neutral-5: #222;
   --surface-color: #444;
   --surface-shadow: #222;
+  --black: #fff
 }
 
 h1 {
@@ -229,7 +230,7 @@ input:focus {
   font-weight: 450;
   text-decoration: none;
   padding-left: 20px;
-  color: initial;
+  color: var(--black);
 }
 .nav-brand:hover {
   text-decoration: none;
@@ -353,6 +354,7 @@ input:focus {
   display: grid;
   grid-template-rows: 1fr auto;
   justify-items: end;
+  column-gap: 4px;
 }
 
 .product-delete {
@@ -540,4 +542,20 @@ input:focus {
 .theme-switcher {
   min-width: auto;
   padding: 5px;
+}
+
+.darkmode {
+  background-color: var(--neutral-4);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  text-align: center;
+  padding: 5px;
+  display: flex;
+}
+
+@media (max-width:600px) {
+  .hide-small {
+    display: none!important;
+  }
 }
