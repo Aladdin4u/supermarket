@@ -7,15 +7,21 @@ import Input from "../components/Input.js";
 
 export default function Products(props) {
   const [products, setProducts] = useState(data);
-  const [searchProduct, setSearchProducts] = useState("");
+  const [search, setSearch] = useState("");
+  const [newSearch, setNewSearch] = useState([]);
   // const [products, setProducts] = useState([]);
   const { get, loading } = useFetch(
     "https://react-tutorial-demo.firebaseio.com/"
   );
 
-  // const handleSearch = () => {
-  //   console.log("search");
-  // };
+  const handleSearch = (e) => {
+    let search = e.target.value;
+    setSearch(search);
+    let searchItem = products.filter(
+      (e) => e.name.toLowerCase() === search.toLowerCase()
+    );
+    setNewSearch(searchItem);
+  };
 
   // useEffect(() => {
   //   get("supermarket.json")
@@ -28,14 +34,25 @@ export default function Products(props) {
   return (
     <div className="products-layout">
       <div>
-        <li className="nav-item">
-          <Input
-            type="search"
-            placeholder="Search..."
-            value={searchProduct}
-            onChange={(e) => setSearchProducts(e.target.value)}
-          />
-        </li>
+        <input
+          className="input"
+          style={{ width: "100%" }}
+          type="search"
+          placeholder="Search..."
+          value={search}
+          onChange={handleSearch}
+        />
+        {newSearch.map((product) => {
+          return (
+            <Product
+              key={product.id}
+              details={product}
+              cart={props.cart}
+              onProductAdd={props.onProductAdd}
+              onProductDelete={props.onProductDelete}
+            />
+          );
+        })}
       </div>
       <h1>Products</h1>
       <p>Take a look at our products</p>
