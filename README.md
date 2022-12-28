@@ -2,7 +2,7 @@
 
 SuperMarket to order groceries with our easy to use app, and get products delivered straight to your doorstep. We use stripe to process your payment
 
-**Link to project:**
+**Link to project:** https://supermarkets123.netlify.app/
 
 ![SuperMarket](https://SuperMarket.gif)
 
