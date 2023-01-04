@@ -97,11 +97,6 @@ export default function Cart() {
               <p>
                 Enter your email and then click on pay and your products will be
                 delivered to you on the same day!
-                <br />
-                <em>
-                  Enter your own Stripe Publishable Key in Cart.js for the
-                  checkout to work
-                </em>
               </p>
               <Input
                 placeholder="Email"

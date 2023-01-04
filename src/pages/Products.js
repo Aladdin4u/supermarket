@@ -3,7 +3,6 @@ import Product from "../components/Product.js";
 import useFetch from "../useFetch.js";
 import Loader from "../Loader.js";
 import data from "../data/data.js";
-import Input from "../components/Input.js";
 
 export default function Products(props) {
   const [products, setProducts] = useState(data);

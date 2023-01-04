@@ -4,7 +4,7 @@ SuperMarket to order groceries with our easy to use app, and get products delive
 
 **Link to project:** https://supermarkets123.netlify.app/
 
-![supermarket](https://user-images.githubusercontent.com/101972392/210285744-978efdc7-365f-4131-867f-b341397a8b3f.gif)
+![supermarket](https://user-images.githubusercontent.com/101972392/210287860-049f5144-fbc4-4587-861f-e6d6a3ff4b52.gif)
 
 ## How It's Made:
 

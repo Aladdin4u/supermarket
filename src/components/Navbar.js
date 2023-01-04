@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { AppContext } from "../AppContext";
+import { FaShoppingCart } from "react-icons/fa";
 import Button from "./Button";
 
 export default function Navbar(props) {
@@ -41,42 +42,48 @@ export default function Navbar(props) {
       </NavLink>
       <ul>
         <li className="nav-item">
-          <div className="theme-switcher darkmode" onClick={handleThemeClick}>
-            {isDarkTheme ? (
-              <DarkModeSwitch
-                style={{ marginBottom: "2rem" }}
-                checked={isDarkMode}
-                onChange={toggleDarkMode}
-                size={24}
-              />
-            ) : (
-              <DarkModeSwitch
-                style={{ marginBottom: "2rem" }}
-                checked={isDarkMode}
-                onChange={toggleDarkMode}
-                size={24}
-              />
-            )}
-          </div>
-        </li>
-        <li className="nav-item hide-small">
           <NavLink exact activeClassName="active" to="/">
             Home
           </NavLink>
         </li>
-        <li className="nav-item hide-small">
+        <li className="nav-item">
           <NavLink exact activeClassName="active" to="/about">
             About us
           </NavLink>
         </li>
-        <li className="nav-item hide-small">
+        <li className="nav-item">
           <NavLink activeClassName="active" to="/products">
             Products
           </NavLink>
         </li>
+        <li className="nav-item">
+          <div className="theme-switcher" onClick={handleThemeClick}>
+            {isDarkTheme ? (
+              <DarkModeSwitch
+                checked={isDarkMode}
+                onChange={toggleDarkMode}
+                size={24}
+                sunColor={"white"}
+              />
+            ) : (
+              <DarkModeSwitch
+                checked={isDarkMode}
+                onChange={toggleDarkMode}
+                size={24}
+                moonColor={"black"}
+                sunColor={"white"}
+              />
+            )}
+          </div>
+        </li>
         <li>
-          <NavLink to="/cart" className="nav-item nav-cart btn btn-accent">
-            Cart ({cartCount})
+          <NavLink to="/cart" className="nav-item">
+            <div className="cartCount-item">
+              <FaShoppingCart size={"24px"} />
+              <div className="cartCount">
+                <div className="cart-item">{cartCount}</div>
+              </div>
+            </div>
           </NavLink>
         </li>
       </ul>
