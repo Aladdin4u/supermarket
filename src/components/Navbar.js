@@ -56,7 +56,7 @@ export default function Navbar(props) {
             Products
           </NavLink>
         </li>
-        <li className="nav-item">
+        <li className="nav-item" style={{paddingRight: "15px"}}>
           <div className="theme-switcher" onClick={handleThemeClick}>
             {isDarkTheme ? (
               <DarkModeSwitch
@@ -80,9 +80,10 @@ export default function Navbar(props) {
           <NavLink to="/cart" className="nav-item">
             <div className="cartCount-item">
               <FaShoppingCart size={"24px"} />
-              <div className="cartCount">
+              {cartCount > 0 && <div className="cartCount">
                 <div className="cart-item">{cartCount}</div>
               </div>
+              }
             </div>
           </NavLink>
         </li>

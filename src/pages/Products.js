@@ -5,12 +5,12 @@ import Loader from "../Loader.js";
 import data from "../data/data.js";
 
 export default function Products(props) {
-  const [products, setProducts] = useState(data);
+  // const [products, setProducts] = useState(data);
   const [search, setSearch] = useState("");
   const [newSearch, setNewSearch] = useState([]);
-  // const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const { get, loading } = useFetch(
-    "https://react-tutorial-demo.firebaseio.com/"
+    "https://shoppingcart-d80f0-default-rtdb.firebaseio.com/"
   );
 
   const handleSearch = (e) => {
@@ -22,13 +22,13 @@ export default function Products(props) {
     setNewSearch(searchItem);
   };
 
-  // useEffect(() => {
-  //   get("supermarket.json")
-  //     .then((data) => {
-  //       setProducts(data);
-  //     })
-  //     .catch((error) => console.log("Could not load products", error));
-  // }, []);
+  useEffect(() => {
+    get("supermarket.json")
+      .then((data) => {
+        setProducts(data);
+      })
+      .catch((error) => console.log("Could not load products", error));
+  }, []);
 
   return (
     <div className="products-layout">

@@ -7,7 +7,7 @@ import { AppContext } from "../AppContext.js";
 // TODO: Replace with your own publishable key
 const stripeLoadedPromise = loadStripe(
   "pk_test_51MDIJ1GsoFsdfGabIPtjmnQsWW7VFkNzYcBP3ctDQzIdx2q3XvbG6454emaG9NcPaF5r1XNj8MST7ml1TGHpkbSl00z2yOAN0F"
-); // pk_test_51MDIJ1GsoFsdfGabIPtjmnQsWW7VFkNzYcBP3ctDQzIdx2q3XvbG6454emaG9NcPaF5r1XNj8MST7ml1TGHpkbSl00z2yOAN0F
+);
 
 export default function Cart() {
   const app = useContext(AppContext);
