@@ -28,8 +28,8 @@ export default function Cart() {
         .redirectToCheckout({
           lineItems: lineItems,
           mode: "payment",
-          successUrl: "http://localhost:3000/success",
-          cancelUrl: "http://localhost:3000/cancel",
+          successUrl: "https://supermarkets123.netlify.app/success", // for local testing http://localhost:3000/success
+          cancelUrl: "https://supermarkets123.netlify.app/cancel", // for local testing http://localhost:3000/cancel
           customerEmail: email,
         })
         .then((response) => {
