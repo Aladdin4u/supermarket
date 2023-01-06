@@ -43,6 +43,10 @@ export default function Cart() {
     });
   }
 
+  // function clearCart() {
+  //   localStorage.removeItem("cart");
+  // }
+
   return (
     <div className="cart-layout">
       <div>
