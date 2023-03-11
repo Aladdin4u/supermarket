@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { AppContext } from "../AppContext";
 import { FaShoppingCart } from "react-icons/fa";
-import Button from "./Button";
 
 export default function Navbar(props) {
   const app = useContext(AppContext);

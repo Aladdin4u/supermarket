@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.js";
 import Home from "./pages/Home.js";
