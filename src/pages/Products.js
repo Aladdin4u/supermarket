@@ -9,9 +9,8 @@ export default function Products(props) {
   const [search, setSearch] = useState("");
   const [products, setProducts] = useState([]);
   const { get, loading } = useFetch(
-    "https://shoppingcart-d80f0-default-rtpb.firebaseio.com/"
+    "https://shoppingcart-d80f0-default-rtdb.firebaseio.com/"
   );
-  
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -24,9 +23,11 @@ export default function Products(props) {
       })
       .catch((error) => console.log("Could not load products", error));
   }, []);
- 
+
   const FilteredProduct = search
-    ? products.filter((product) => product.name.toLowerCase() === search.toLowerCase())
+    ? products.filter(
+        (product) => product.name.toLowerCase() === search.toLowerCase()
+      )
     : products;
 
   return (
