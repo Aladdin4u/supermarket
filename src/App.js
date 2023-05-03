@@ -6,6 +6,8 @@ import About from "./pages/About.js";
 import Cancel from "./pages/Cancel.js";
 import Success from "./pages/Success.js";
 import Products from "./pages/Products.js";
+import Login from "./pages/Login.js";
+import Register from "./pages/Register.js";
 import ProductDetails from "./pages/ProductDetails.js";
 import Cart from "./components/Cart.js";
 import { AppProvider } from "./AppContext.js";
@@ -19,6 +21,12 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/register">
+              <Register />
             </Route>
             <Route exact path="/about">
               <About />
