@@ -319,6 +319,36 @@ input:focus {
   padding-top: 40px;
 }
 
+.login-layout {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-input {
+  border-radius: 5px;
+  border: none;
+  padding: 15px;
+}
+
+.form-input:focus {
+  outline: none;
+  border: no;
+}
+
 .products-layout {
   padding-top: 40px;
   padding-bottom: 40px;

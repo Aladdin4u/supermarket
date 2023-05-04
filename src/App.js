@@ -1,45 +1,41 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Navbar from "./components/Navbar.js";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Cart from "./components/Cart.js";
 import Home from "./pages/Home.js";
 import About from "./pages/About.js";
 import Cancel from "./pages/Cancel.js";
 import Success from "./pages/Success.js";
-import Products from "./pages/Products.js";
-import ProductDetails from "./pages/ProductDetails.js";
-import Cart from "./components/Cart.js";
+import Login from "./pages/Login.js";
+import Register from "./pages/Register.js";
+import Products from "./pages/Products/Products.js";
+import ProductDetails from "./pages/Products/ProductDetails.js";
+import ProductDetailInfo from "./pages/Products/ProductDetailInfo";
+import ProductDetailNutrition from "./pages/Products/ProductDetailNutrition";
+import ProductDetailStorage from "./pages/Products/ProductDetailStorage";
 import { AppProvider } from "./AppContext.js";
 
 function App() {
   return (
     <AppProvider>
       <BrowserRouter>
-        <Navbar />
-        <div className="container">
-          <Switch>
-            <Route exact path="/">
-              <Home />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/cancel" element={<Cancel />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:id" element={<ProductDetails />}>
+              <Route index element={<ProductDetailInfo />} />
+              <Route path="nutrition" element={<ProductDetailNutrition/>} />
+              <Route path="storage" element={<ProductDetailStorage/>} />
             </Route>
-            <Route exact path="/about">
-              <About />
-            </Route>
-            <Route exact path="/success">
-              <Success />
-            </Route>
-            <Route exact path="/cancel">
-              <Cancel />
-            </Route>
-            <Route exact path="/products">
-              <Products />
-            </Route>
-            <Route path="/products/:id">
-              <ProductDetails />
-            </Route>
-            <Route exact path="/cart">
-              <Cart />
-            </Route>
-          </Switch>
-        </div>
+          </Route>
+        </Routes>
       </BrowserRouter>
     </AppProvider>
   );
