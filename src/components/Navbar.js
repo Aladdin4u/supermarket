@@ -34,6 +34,10 @@ export default function Navbar(props) {
     setIsDarkTheme(!isDarkTheme);
   }
 
+  const activeStyles = {
+    fontWeight: "bold",
+  };
+
   return (
     <nav className="navbar">
       <NavLink to="/" className="nav-brand">
@@ -41,21 +45,22 @@ export default function Navbar(props) {
       </NavLink>
       <ul>
         <li className="nav-item">
-          <NavLink exact activeClassName="active" to="/">
-            Home
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink exact activeClassName="active" to="/about">
+          <NavLink
+            style={({ isActive }) => (isActive ? activeStyles : null)}
+            to="/about"
+          >
             About us
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink activeClassName="active" to="/products">
+          <NavLink
+            style={({ isActive }) => (isActive ? activeStyles : null)}
+            to="/products"
+          >
             Products
           </NavLink>
         </li>
-        <li className="nav-item" style={{paddingRight: "15px"}}>
+        <li className="nav-item" style={{ paddingRight: "15px" }}>
           <div className="theme-switcher" onClick={handleThemeClick}>
             {isDarkTheme ? (
               <DarkModeSwitch
@@ -79,10 +84,11 @@ export default function Navbar(props) {
           <NavLink to="/cart" className="nav-item">
             <div className="cartCount-item">
               <FaShoppingCart size={"24px"} />
-              {cartCount > 0 && <div className="cartCount">
-                <div className="cart-item">{cartCount}</div>
-              </div>
-              }
+              {cartCount > 0 && (
+                <div className="cartCount">
+                  <div className="cart-item">{cartCount}</div>
+                </div>
+              )}
             </div>
           </NavLink>
         </li>

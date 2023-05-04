@@ -5,14 +5,13 @@ import Button from "./Button.js";
 import { AppContext } from "../AppContext.js";
 
 // TODO: Replace with your own publishable key
-const stripeLoadedPromise = loadStripe(
-  "pk_test_51MDIJ1GsoFsdfGabIPtjmnQsWW7VFkNzYcBP3ctDQzIdx2q3XvbG6454emaG9NcPaF5r1XNj8MST7ml1TGHpkbSl00z2yOAN0F"
-);
+const stripeLoadedPromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 export default function Cart() {
   const app = useContext(AppContext);
   const cart = app.cart;
   const totalPrice = app.getTotalPrice();
+  console.log("apikey", process.env.REACT_APP_STRIPE_KEY);
 
   const [email, setEmail] = useState("");
 
@@ -28,8 +27,8 @@ export default function Cart() {
         .redirectToCheckout({
           lineItems: lineItems,
           mode: "payment",
-          successUrl: "https://supermarkets123.netlify.app/success", // for local testing http://localhost:3000/success
-          cancelUrl: "https://supermarkets123.netlify.app/cancel", // for local testing http://localhost:3000/cancel
+          successUrl: process.env.REACT_APP_SUCCESSURL, // for local testing http://localhost:3000/success
+          cancelUrl: process.env.REACT_APP_CANCELURL, // for local testing http://localhost:3000/cancel
           customerEmail: email,
         })
         .then((response) => {
@@ -42,10 +41,6 @@ export default function Cart() {
         });
     });
   }
-
-  // function clearCart() {
-  //   localStorage.removeItem("cart");
-  // }
 
   return (
     <div className="cart-layout">

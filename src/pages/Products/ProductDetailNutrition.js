@@ -1,8 +1,10 @@
 import React from "react";
+import { useOutletContext } from "react-router-dom";
 
-export default function ProductDetailNutrition({ nutrition }) {
+export default function ProductDetailNutrition() {
+  const { product } = useOutletContext()
   return (
-    <table className="table table-nutrition">
+    <table className="table table-product">
       <thead>
         <tr>
           <th>Nutrient</th>
@@ -12,19 +14,19 @@ export default function ProductDetailNutrition({ nutrition }) {
       <tbody>
         <tr>
           <td>Protein</td>
-          <td>{nutrition.protein}g</td>
+          <td>{product.protein}g</td>
         </tr>
         <tr>
           <td>Carbohydrates</td>
-          <td>{nutrition.carbs}g</td>
+          <td>{product.carbs}g</td>
         </tr>
         <tr>
           <td>Fat</td>
-          <td>{nutrition.fat}g</td>
+          <td>{product.fat}g</td>
         </tr>
         <tr>
           <td>Salt</td>
-          <td>{nutrition.salt}g</td>
+          <td>{product.salt}g</td>
         </tr>
       </tbody>
     </table>
