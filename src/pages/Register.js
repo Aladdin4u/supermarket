@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../pages/firebase";
 import Button from "../components/Button";
 
 export default function Register() {
@@ -7,6 +9,11 @@ export default function Register() {
     password: "",
     comfirmPassword: "",
   });
+  const [user, setUser] = useState({})
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  })
   const handleChange = (event) => {
     setFormData((prevFormData) => {
       return {
@@ -15,14 +22,27 @@ export default function Register() {
       };
     });
   };
-  const handleFormSubmit = (event) => {
-    console.log(event)
-  }
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    if(formData.password !== formData.comfirmPassword) {
+      console.log("password not correct")
+    }
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        formData.username,
+        formData.password
+      );
+      console.log(user)
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="login-layout">
       <form onSubmit={handleFormSubmit} className="form-container">
         <div className="input-container">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Username*</label>
           <input
             type="text"
             id="username"
@@ -34,7 +54,7 @@ export default function Register() {
           ></input>
         </div>
         <div className="input-container">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password*</label>
           <input
             type="password"
             id="password"
