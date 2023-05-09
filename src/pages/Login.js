@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../pages/firebase";
+import { auth } from "../firebase";
 import Button from "../components/Button";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigation = useNavigate()
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -35,8 +37,10 @@ export default function Login() {
         formData.password
       );
       console.log(user)
+      navigation("/")
     } catch (error) {
       console.log(error);
+      console.log(error.message);
     }
   };
   return (
@@ -66,7 +70,9 @@ export default function Login() {
             className="form-input"
           ></input>
         </div>
+      <p style={{color: "red"}}>Invalid username and password</p>
         <Button type="submit">Login</Button>
+      <p>Don't have an account <Link to="/register" style={{textDecoration: "underline"}}>register</Link></p>
       </form>
     </div>
   );

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../pages/firebase";
+import { auth } from "../firebase";
 import Button from "../components/Button";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigation = useNavigate()
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    comfirmPassword: "",
+    confirmPassword: "",
   });
   const [user, setUser] = useState({})
 
@@ -25,7 +27,7 @@ export default function Register() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     if(formData.password !== formData.comfirmPassword) {
-      console.log("password not correct")
+      return alert("password not correct")
     }
     try {
       const user = await createUserWithEmailAndPassword(
@@ -34,6 +36,7 @@ export default function Register() {
         formData.password
       );
       console.log(user)
+      navigation("/login")
     } catch (error) {
       console.log(error);
     }
@@ -66,18 +69,19 @@ export default function Register() {
           ></input>
         </div>
         <div className="input-container">
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">Confirm Password*</label>
           <input
-            type="confirmPassword"
+            type="password"
             id="confirmPassword"
             name="confirmPassword"
             placeholder="confirmPassword"
-            value={formData.password}
+            value={formData.confirmPassword}
             onChange={handleChange}
             className="form-input"
           ></input>
         </div>
         <Button type="submit">Sign up</Button>
+        <p>Have an account <Link to="/login" style={{textDecoration: "underline"}}>login</Link></p>
       </form>
     </div>
   );
