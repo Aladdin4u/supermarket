@@ -6,6 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigation = useNavigate()
+import Button from "../components/Button";
+
+export default function Login() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -43,11 +46,18 @@ export default function Login() {
       console.log(error.message);
     }
   };
+  const handleFormSubmit = (event) => {
+    event.preventDefault()
+    console.log(event)
+  }
   return (
     <div className="login-layout">
       <form onSubmit={handleFormSubmit} className="form-container">
         <div className="input-container">
+
           <label htmlFor="username">Username*</label>
+
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             id="username"
@@ -59,7 +69,11 @@ export default function Login() {
           ></input>
         </div>
         <div className="input-container">
+
           <label htmlFor="password">Password*</label>
+
+          <label htmlFor="password">Password</label>
+
           <input
             type="password"
             id="password"
@@ -70,9 +84,13 @@ export default function Login() {
             className="form-input"
           ></input>
         </div>
+
       <p style={{color: "red"}}>Invalid username and password</p>
         <Button type="submit">Login</Button>
       <p>Don't have an account <Link to="/register" style={{textDecoration: "underline"}}>register</Link></p>
+
+        <Button type="submit">Login</Button>
+
       </form>
     </div>
   );

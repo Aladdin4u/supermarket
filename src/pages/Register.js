@@ -16,6 +16,14 @@ export default function Register() {
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   })
+import Button from "../components/Button";
+
+export default function Register() {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
   const handleChange = (event) => {
     setFormData((prevFormData) => {
       return {
@@ -41,11 +49,16 @@ export default function Register() {
       console.log(error);
     }
   };
+  const handleFormSubmit = (event) => {
+    console.log(event)
+  }
   return (
     <div className="login-layout">
       <form onSubmit={handleFormSubmit} className="form-container">
         <div className="input-container">
+
           <label htmlFor="username">Username*</label>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             id="username"
@@ -57,7 +70,11 @@ export default function Register() {
           ></input>
         </div>
         <div className="input-container">
+
           <label htmlFor="password">Password*</label>
+
+          <label htmlFor="password">Password</label>
+
           <input
             type="password"
             id="password"
@@ -69,6 +86,7 @@ export default function Register() {
           ></input>
         </div>
         <div className="input-container">
+
           <label htmlFor="confirmPassword">Confirm Password*</label>
           <input
             type="password"
@@ -76,6 +94,13 @@ export default function Register() {
             name="confirmPassword"
             placeholder="confirmPassword"
             value={formData.confirmPassword}
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            type="confirmPassword"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="confirmPassword"
+            value={formData.password}
             onChange={handleChange}
             className="form-input"
           ></input>
