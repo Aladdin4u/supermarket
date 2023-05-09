@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import Button from "../../components/Button.js";
-import { useOutletContext } from "react-router-dom"
-import { AppContext } from "../../AppContext.js";
+import { useOutletContext } from "react-router-dom";
+import { AppContext } from "../../content/AppContext.js";
 
 export default function ProductDetailInfo() {
-  const { product } = useOutletContext()
+  const { product } = useOutletContext();
   const app = useContext(AppContext);
   return (
     <>

@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import Input from "./Input.js";
 import Button from "./Button.js";
-import { AppContext } from "../AppContext.js";
+import { AppContext } from "../content/AppContext.js";
 
 // TODO: Replace with your own publishable key
 const stripeLoadedPromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);

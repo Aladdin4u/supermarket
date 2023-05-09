@@ -1,20 +1,26 @@
-import React, { useState } from "react";
-import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import React, { useState, useContext } from "react";
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
 import { auth } from "../firebase";
 import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../content/AuthContext";
 
 export default function Login() {
-  const navigation = useNavigate()
+  const navigation = useNavigate();
+  const { loading, error, dispatch } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
-  })
+  });
 
   const handleChange = (event) => {
     setFormData((prevFormData) => {
@@ -25,22 +31,25 @@ export default function Login() {
     });
   };
 
-  const logout = async() => {
-    await signOut(auth)
-  }
+  const logout = async () => {
+    await signOut(auth);
+  };
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    dispatch({ type: "LOGIN_START" });
     try {
-      const user = await signInWithEmailAndPassword(
+      const res = await signInWithEmailAndPassword(
         auth,
         formData.username,
         formData.password
       );
-      console.log(user)
-      navigation("/")
+      console.log(user);
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      navigation("/");
     } catch (error) {
       console.log(error);
       console.log(error.message);
+      dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
     }
   };
   return (
@@ -70,9 +79,16 @@ export default function Login() {
             className="form-input"
           ></input>
         </div>
-      <p style={{color: "red"}}>Invalid username and password</p>
-        <Button type="submit">Login</Button>
-      <p>Don't have an account <Link to="/register" style={{textDecoration: "underline"}}>register</Link></p>
+        {error && <p style={{ color: "red" }}>Invalid username and password</p>}
+        <Button disabled={loading} type="submit">
+          Login
+        </Button>
+        <p>
+          Don't have an account{" "}
+          <Link to="/register" style={{ textDecoration: "underline" }}>
+            register
+          </Link>
+        </p>
       </form>
     </div>
   );

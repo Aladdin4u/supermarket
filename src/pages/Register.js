@@ -1,21 +1,26 @@
-import React, { useState } from "react";
-import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import React, { useState, useContext } from "react";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { auth } from "../firebase";
 import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../content/AuthContext";
 
 export default function Register() {
-  const navigation = useNavigate()
+  const navigation = useNavigate();
+  const { loading, dispatch, error } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
     confirmPassword: "",
   });
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
-  })
+  });
   const handleChange = (event) => {
     setFormData((prevFormData) => {
       return {
@@ -26,18 +31,21 @@ export default function Register() {
   };
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    if(formData.password !== formData.comfirmPassword) {
-      return alert("password not correct")
+    dispatch({ type: "LOGIN_START" });
+    if (formData.password !== formData.comfirmPassword) {
+      return alert("password not correct");
     }
     try {
-      const user = await createUserWithEmailAndPassword(
+      const res = await createUserWithEmailAndPassword(
         auth,
         formData.username,
         formData.password
       );
-      console.log(user)
-      navigation("/login")
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      console.log(user);
+      navigation("/login");
     } catch (error) {
+      dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
       console.log(error);
     }
   };
@@ -80,8 +88,16 @@ export default function Register() {
             className="form-input"
           ></input>
         </div>
-        <Button type="submit">Sign up</Button>
-        <p>Have an account <Link to="/login" style={{textDecoration: "underline"}}>login</Link></p>
+        {error && <p style={{ color: "red" }}>{error}Invalid username and password</p>}
+        <Button disabled={loading} type="submit">
+          Sign up
+        </Button>
+        <p>
+          Have an account{" "}
+          <Link to="/login" style={{ textDecoration: "underline" }}>
+            login
+          </Link>
+        </p>
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
-import { AppContext } from "../AppContext";
+import { AppContext } from "../content/AppContext";
 import { FaShoppingCart } from "react-icons/fa";
 
 export default function Navbar(props) {

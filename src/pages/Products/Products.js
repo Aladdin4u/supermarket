@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Product from "../../components/Product.js";
-import useFetch from "../../useFetch.js";
+import useFetch from "../../hooks/useFetch.js";
 import Loader from "../../Loader.js";
 // import data from "../data/data.js";
 
