@@ -1,3 +1,6 @@
+import React, { useState, useContext } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 import React, { useState } from "react";
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase";
@@ -7,8 +10,12 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Login() {
   const navigation = useNavigate()
 import Button from "../components/Button";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../content/AuthContext";
 
 export default function Login() {
+  const navigation = useNavigate();
+  const { loading, error, dispatch } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -28,6 +35,11 @@ export default function Login() {
     });
   };
 
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await signInWithEmailAndPassword(
   const logout = async() => {
     await signOut(auth)
   }
@@ -39,6 +51,12 @@ export default function Login() {
         formData.username,
         formData.password
       );
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.user.email });
+      navigation("/cart");
+    } catch (error) {
+      dispatch({ type: "LOGIN_FAILURE", payload: error.message });
+    }
+  };
       console.log(user)
       navigation("/")
     } catch (error) {
@@ -54,6 +72,7 @@ export default function Login() {
     <div className="login-layout">
       <form onSubmit={handleFormSubmit} className="form-container">
         <div className="input-container">
+          <label htmlFor="username">Username*</label>
 
           <label htmlFor="username">Username*</label>
 
@@ -69,11 +88,11 @@ export default function Login() {
           ></input>
         </div>
         <div className="input-container">
+          <label htmlFor="password">Password*</label>
 
           <label htmlFor="password">Password*</label>
 
           <label htmlFor="password">Password</label>
-
           <input
             type="password"
             id="password"
@@ -84,13 +103,22 @@ export default function Login() {
             className="form-input"
           ></input>
         </div>
+        {error && <p className="form-error">Invalid username and password</p>}
+        <Button disabled={loading} type="submit">
+          Login
+        </Button>
+        <p>
+          Don't have an account{" "}
+          <Link to="/register" style={{ textDecoration: "underline" }}>
+            register
+          </Link>
+        </p>
 
       <p style={{color: "red"}}>Invalid username and password</p>
         <Button type="submit">Login</Button>
       <p>Don't have an account <Link to="/register" style={{textDecoration: "underline"}}>register</Link></p>
 
         <Button type="submit">Login</Button>
-
       </form>
     </div>
   );

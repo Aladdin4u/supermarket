@@ -2,16 +2,18 @@ import React, { useState, useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import Input from "./Input.js";
 import Button from "./Button.js";
-import { AppContext } from "../AppContext.js";
+import { AppContext } from "../content/AppContext.js";
+import { AuthContext } from "../content/AuthContext";
+import { Link } from "react-router-dom";
 
 // TODO: Replace with your own publishable key
 const stripeLoadedPromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 export default function Cart() {
   const app = useContext(AppContext);
+  const { user } = useContext(AuthContext);
   const cart = app.cart;
   const totalPrice = app.getTotalPrice();
-  console.log("apikey", process.env.REACT_APP_STRIPE_KEY);
 
   const [email, setEmail] = useState("");
 
@@ -92,20 +94,29 @@ export default function Cart() {
                 </tr>
               </tfoot>
             </table>
-            <form className="pay-form" onSubmit={handleFormSubmit}>
-              <p>
-                Enter your email and then click on pay and your products will be
-                delivered to you on the same day!
-              </p>
-              <Input
-                placeholder="Email"
-                onChange={(event) => setEmail(event.target.value)}
-                value={email}
-                type="email"
-                required
-              />
-              <Button type="submit">Pay</Button>
-            </form>
+            {user ? (
+              <form className="pay-form" onSubmit={handleFormSubmit}>
+                <p>
+                  Enter your email and then click on pay and your products will
+                  be delivered to you on the same day!
+                </p>
+                <Input
+                  placeholder="Email"
+                  onChange={(event) => setEmail(event.target.value)}
+                  value={email}
+                  type="email"
+                  required
+                />
+                <Button type="submit">Pay</Button>
+              </form>
+            ) : (
+              <>
+                <p>You have to Login to complete your order</p>
+                <Link to="/login" className="btn btn-default">
+                  Login
+                </Link>
+              </>
+            )}
           </>
         )}
       </div>

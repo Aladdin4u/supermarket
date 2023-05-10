@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useParams, Outlet } from "react-router-dom";
-import useFetch from "../../useFetch.js";
+import useFetch from "../../hooks/useFetch.js";
 
 export default function ProductDetails(props) {
   const [product, setProduct] = useState({});
@@ -19,7 +19,7 @@ export default function ProductDetails(props) {
 
   const activeStyles = {
     fontWeight: "bold",
-    borderBottom: "7px solid #2b8379"
+    borderBottom: "7px solid #2b8379",
   };
 
   return (
