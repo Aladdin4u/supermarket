@@ -1,9 +1,5 @@
 import React, { useState, useContext } from "react";
-import {
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,11 +12,6 @@ export default function Login() {
     username: "",
     password: "",
   });
-  const [user, setUser] = useState({});
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
 
   const handleChange = (event) => {
     setFormData((prevFormData) => {
@@ -31,9 +22,6 @@ export default function Login() {
     });
   };
 
-  const logout = async () => {
-    await signOut(auth);
-  };
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     dispatch({ type: "LOGIN_START" });
@@ -43,13 +31,10 @@ export default function Login() {
         formData.username,
         formData.password
       );
-      console.log(user);
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-      navigation("/");
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.user.email });
+      navigation("/cart");
     } catch (error) {
-      console.log(error);
-      console.log(error.message);
-      dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
+      dispatch({ type: "LOGIN_FAILURE", payload: error.message });
     }
   };
   return (
@@ -79,7 +64,7 @@ export default function Login() {
             className="form-input"
           ></input>
         </div>
-        {error && <p style={{ color: "red" }}>Invalid username and password</p>}
+        {error && <p className="form-error">Invalid username and password</p>}
         <Button disabled={loading} type="submit">
           Login
         </Button>

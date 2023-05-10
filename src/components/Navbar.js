@@ -1,11 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 import { NavLink } from "react-router-dom";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { AppContext } from "../content/AppContext";
-import { FaShoppingCart } from "react-icons/fa";
+import { AuthContext } from "../content/AuthContext";
+import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
 
 export default function Navbar(props) {
   const app = useContext(AppContext);
+  const {user, dispatch } = useContext(AuthContext);
   const cartCount = app.getCartCount();
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [isDarkMode, setDarkMode] = useState(true);
@@ -30,6 +34,11 @@ export default function Navbar(props) {
     }
   }, [isDarkTheme]);
 
+  const logout = async () => {
+    dispatch({ type: "LOGIN_OUT" })
+    await signOut(auth);
+  };
+
   function handleThemeClick() {
     setIsDarkTheme(!isDarkTheme);
   }
@@ -44,6 +53,22 @@ export default function Navbar(props) {
         SuperM
       </NavLink>
       <ul>
+        {user ?( <li className="nav-item">
+          <NavLink
+            style={({ isActive }) => (isActive ? activeStyles : null)}
+            to="/"
+          >
+            <FaUserCircle size={"24px"} onClick={logout} />
+          </NavLink>
+        </li>) :
+        (<li className="nav-item">
+          <NavLink
+            style={({ isActive }) => (isActive ? activeStyles : null)}
+            to="/login"
+          >
+            Sign up / Login
+          </NavLink>
+        </li>)}
         <li className="nav-item">
           <NavLink
             style={({ isActive }) => (isActive ? activeStyles : null)}
