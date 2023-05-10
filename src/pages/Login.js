@@ -1,6 +1,14 @@
 import React, { useState, useContext } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import React, { useState } from "react";
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase";
+import Button from "../components/Button";
+import { Link, useNavigate } from "react-router-dom";
+
+export default function Login() {
+  const navigation = useNavigate()
 import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../content/AuthContext";
@@ -12,6 +20,11 @@ export default function Login() {
     username: "",
     password: "",
   });
+  const [user, setUser] = useState({})
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  })
 
   const handleChange = (event) => {
     setFormData((prevFormData) => {
@@ -27,6 +40,13 @@ export default function Login() {
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await signInWithEmailAndPassword(
+  const logout = async() => {
+    await signOut(auth)
+  }
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const user = await signInWithEmailAndPassword(
         auth,
         formData.username,
         formData.password
@@ -37,11 +57,26 @@ export default function Login() {
       dispatch({ type: "LOGIN_FAILURE", payload: error.message });
     }
   };
+      console.log(user)
+      navigation("/")
+    } catch (error) {
+      console.log(error);
+      console.log(error.message);
+    }
+  };
+  const handleFormSubmit = (event) => {
+    event.preventDefault()
+    console.log(event)
+  }
   return (
     <div className="login-layout">
       <form onSubmit={handleFormSubmit} className="form-container">
         <div className="input-container">
           <label htmlFor="username">Username*</label>
+
+          <label htmlFor="username">Username*</label>
+
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             id="username"
@@ -54,6 +89,10 @@ export default function Login() {
         </div>
         <div className="input-container">
           <label htmlFor="password">Password*</label>
+
+          <label htmlFor="password">Password*</label>
+
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
@@ -74,6 +113,12 @@ export default function Login() {
             register
           </Link>
         </p>
+
+      <p style={{color: "red"}}>Invalid username and password</p>
+        <Button type="submit">Login</Button>
+      <p>Don't have an account <Link to="/register" style={{textDecoration: "underline"}}>register</Link></p>
+
+        <Button type="submit">Login</Button>
       </form>
     </div>
   );
