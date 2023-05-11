@@ -89,7 +89,7 @@ export default function Register() {
             className="form-input"
           ></input>
         </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="form-error">{error}</p>}
         <Button disabled={loading} type="submit">
           Sign up
         </Button>
