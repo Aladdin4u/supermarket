@@ -69,6 +69,7 @@ export default function Navbar(props) {
         SuperM
       </NavLink>
       <div className="hide">
+      <div>
         <ul>
           <li className="nav-item">
             <NavLink
@@ -97,6 +98,7 @@ export default function Navbar(props) {
         </ul>
       </div>
       <div className="hide">
+      <div>
         <ul>
           {user ? (
             <li className="nav-item">
@@ -134,6 +136,7 @@ export default function Navbar(props) {
                   size={24}
                   moonColor={"black"}
                   sunColor={"#2b8379"}
+                  sunColor={"white"}
                 />
               )}
             </div>
