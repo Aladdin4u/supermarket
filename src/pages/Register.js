@@ -12,7 +12,7 @@ export default function Register() {
   const navigation = useNavigate();
   const { loading, dispatch, error } = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
     confirmPassword: "",
   });
@@ -32,20 +32,21 @@ export default function Register() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     dispatch({ type: "LOGIN_START" });
-    if (formData.password !== formData.comfirmPassword) {
-      return alert("password not correct");
+    if (formData.password !== formData.confirmPassword) {
+      dispatch({ type: "LOGIN_FAILURE", payload: "password incorrect" });
+      return alert("password incorrect");
     }
     try {
       const res = await createUserWithEmailAndPassword(
         auth,
-        formData.username,
+        formData.email,
         formData.password
       );
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
       console.log(user);
       navigation("/login");
     } catch (error) {
-      dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
+      dispatch({ type: "LOGIN_FAILURE", payload: error.message });
       console.log(error);
     }
   };
@@ -53,13 +54,13 @@ export default function Register() {
     <div className="login-layout">
       <form onSubmit={handleFormSubmit} className="form-container">
         <div className="input-container">
-          <label htmlFor="username">Username*</label>
+          <label htmlFor="email">Email*</label>
           <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="username"
-            value={formData.username}
+            type="email"
+            id="email"
+            name="email"
+            placeholder="email"
+            value={formData.email}
             onChange={handleChange}
             className="form-input"
           ></input>
@@ -88,7 +89,7 @@ export default function Register() {
             className="form-input"
           ></input>
         </div>
-        {error && <p style={{ color: "red" }}>{error}Invalid username and password</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
         <Button disabled={loading} type="submit">
           Sign up
         </Button>
@@ -101,4 +102,4 @@ export default function Register() {
       </form>
     </div>
   );
-}
+};

@@ -9,7 +9,7 @@ export default function Login() {
   const navigation = useNavigate();
   const { loading, error, dispatch } = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -28,7 +28,7 @@ export default function Login() {
     try {
       const res = await signInWithEmailAndPassword(
         auth,
-        formData.username,
+        formData.email,
         formData.password
       );
       dispatch({ type: "LOGIN_SUCCESS", payload: res.user.email });
@@ -41,13 +41,13 @@ export default function Login() {
     <div className="login-layout">
       <form onSubmit={handleFormSubmit} className="form-container">
         <div className="input-container">
-          <label htmlFor="username">Username*</label>
+          <label htmlFor="email">Email*</label>
           <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="username"
-            value={formData.username}
+            type="email"
+            id="email"
+            name="email"
+            placeholder="email"
+            value={formData.email}
             onChange={handleChange}
             className="form-input"
           ></input>
@@ -64,7 +64,7 @@ export default function Login() {
             className="form-input"
           ></input>
         </div>
-        {error && <p className="form-error">Invalid username and password</p>}
+        {error && <p className="form-error">Invalid email and password</p>}
         <Button disabled={loading} type="submit">
           Login
         </Button>
