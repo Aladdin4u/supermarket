@@ -22,7 +22,7 @@ export default function Products(props) {
         setProducts(data);
       })
       .catch((error) => console.log("Could not load products", error));
-  }, []);
+  }, [get]);
 
   const FilteredProduct = search
     ? products.filter(

@@ -3,11 +3,11 @@ import { NavLink, useParams, Outlet } from "react-router-dom";
 import useFetch from "../../hooks/useFetch.js";
 
 export default function ProductDetails(props) {
+  const params = useParams()
   const [product, setProduct] = useState({});
   const { get } = useFetch(
     "https://shoppingcart-d80f0-default-rtdb.firebaseio.com/"
   );
-  const params = useParams();
 
   useEffect(() => {
     get(`productinfo/id${params.id}.json`)
@@ -15,7 +15,7 @@ export default function ProductDetails(props) {
         setProduct(data);
       })
       .catch((error) => console.log("Could not load product details", error));
-  }, []);
+  }, [get, params.id]);
 
   const activeStyles = {
     fontWeight: "bold",
