@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../content/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Register() {
   const navigation = useNavigate();

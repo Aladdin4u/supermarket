@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Button from "../components/Button.js";
-import { AppContext } from "../content/AppContext.js";
+import { AppContext } from "../context/AppContext.js";
 
 export default function Product(props) {
   const { details } = props;

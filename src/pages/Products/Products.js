@@ -53,7 +53,7 @@ export default function Products(props) {
               details={product}
               cart={props.cart}
               onProductAdd={props.onProductAdd}
-              onProducpelete={props.onProducpelete}
+              onProductDelete={props.onProductDelete}
             />
           );
         })}

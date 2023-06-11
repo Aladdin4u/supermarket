@@ -3,8 +3,8 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { NavLink } from "react-router-dom";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
-import { AppContext } from "../content/AppContext";
-import { AuthContext } from "../content/AuthContext";
+import { AppContext } from "../context/AppContext";
+import { AuthContext } from "../context/AuthContext";
 import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
 import { MdMenu, MdClose } from "react-icons/md";
 

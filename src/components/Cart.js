@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import Input from "./Input.js";
 import Button from "./Button.js";
-import { AppContext } from "../content/AppContext.js";
-import { AuthContext } from "../content/AuthContext";
+import { AppContext } from "../context/AppContext.js";
+import { AuthContext } from "../context/AuthContext.js";
 import { Link } from "react-router-dom";
 
 // TODO: Replace with your own publishable key
