@@ -1,6 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
 import { NavLink } from "react-router-dom";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { AppContext } from "../context/AppContext";
@@ -10,7 +8,7 @@ import { MdMenu, MdClose } from "react-icons/md";
 
 export default function Navbar(props) {
   const app = useContext(AppContext);
-  const { user, dispatch } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const cartCount = app.getCartCount();
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [isDarkMode, setDarkMode] = useState(true);
@@ -45,15 +43,6 @@ export default function Navbar(props) {
       document.body.classList.remove("dark");
     }
   }, [isDarkTheme]);
-
-  const logout = async () => {
-    try {
-      dispatch({ type: "LOGIN_OUT" });
-      await signOut(auth);
-    } catch (error) {
-      dispatch({ type: "LOGIN_FAILURE", payload: error.message });
-    }
-  };
 
   function handleThemeClick() {
     setIsDarkTheme(!isDarkTheme);
@@ -102,10 +91,9 @@ export default function Navbar(props) {
             <li className="nav-item">
               <NavLink
                 style={({ isActive }) => (isActive ? activeStyles : null)}
-                to="/"
-                title="logout"
+                to="/profile"
               >
-                <FaUserCircle size={"24px"} onClick={logout} />
+                <FaUserCircle size={"24px"} />
               </NavLink>
             </li>
           ) : (
@@ -183,10 +171,9 @@ export default function Navbar(props) {
                 <li className="nav-item">
                   <NavLink
                     style={({ isActive }) => (isActive ? activeStyles : null)}
-                    to="/"
-                    title="logout"
+                    to="/profile"
                   >
-                    <FaUserCircle size={"24px"} onClick={logout} />
+                    <FaUserCircle size={"24px"} />
                   </NavLink>
                 </li>
               ) : (
