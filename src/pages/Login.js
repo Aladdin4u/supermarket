@@ -31,7 +31,12 @@ export default function Login() {
         formData.email,
         formData.password
       );
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.user.email });
+      console.log(res.user)
+      const user = {
+        id: res.user.uid,
+        email: res.user.email
+      }
+      dispatch({ type: "LOGIN_SUCCESS", payload: user });
       navigation("/cart");
     } catch (error) {
       dispatch({ type: "LOGIN_FAILURE", payload: error.message });

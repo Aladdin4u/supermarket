@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import { firebase } from "../firebase";
 import Input from "./Input.js";
 import Button from "./Button.js";
 import { AppContext } from "../context/AppContext.js";
@@ -35,7 +36,13 @@ export default function Cart() {
         })
         .then((response) => {
           // this will only log if the redirect did not work
+          console.log(response);
           console.log(response.error);
+          // const saveToFirebase = FireBase.firestore();
+          // saveToFirebase.collection("todos").add({
+          //   id: uuid(),
+          //   item: input,
+          // });
         })
         .catch((error) => {
           // wrong API key? you will see the error message here
