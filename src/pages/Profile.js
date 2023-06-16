@@ -1,11 +1,9 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
-  const navigate = useNavigate();
   const { user, dispatch } = useContext(AuthContext);
 
   const logout = async () => {
