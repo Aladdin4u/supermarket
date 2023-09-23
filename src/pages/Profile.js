@@ -17,7 +17,7 @@ export default function Profile() {
 
   return (
     <div>
-      <h1>Welcome {user}</h1>
+      <h1>Welcome {user.email}</h1>
       <button onClick={logout}>Logout</button>
     </div>
   );

@@ -4,6 +4,7 @@ import useFetch from "../../hooks/useFetch.js";
 
 export default function ProductDetails(props) {
   const params = useParams()
+  console.log(params)
   const [product, setProduct] = useState({});
   const { get } = useFetch(
     "https://shoppingcart-d80f0-default-rtdb.firebaseio.com/"
