@@ -8,7 +8,7 @@ SuperMarket to order groceries with our easy to use app, and get products delive
 
 ## How It's Made:
 
-**Tech used:** <p>![HTML5 BADGE](https://img.shields.io/static/v1?label=|&message=HTML5&color=23555f&style=plastic&logo=html5) ![CSS BADGE](https://img.shields.io/static/v1?label=|&message=CSS3&color=285f65&style=plastic&logo=css3) ![JAVASCRIPT BADGE](https://img.shields.io/static/v1?label=|&message=JAVASCRIPT&color=3c7f5d&style=plastic&logo=javascript) ![REACT BADGE](https://img.shields.io/static/v1?label=|&message=REACT&color=2b625f&style=plastic&logo=react.js) ![FIREBASE BADGE](https://img.shields.io/static/v1?label=|&message=FIREBASE&color=2b625f&style=plastic&logo=firebase)</p>
+**Tech used:** <p>![HTML5 BADGE](https://img.shields.io/static/v1?label=|&message=HTML5&color=23555f&style=plastic&logo=html5) ![CSS BADGE](https://img.shields.io/static/v1?label=|&message=CSS3&color=285f65&style=plastic&logo=css3) ![JAVASCRIPT BADGE](https://img.shields.io/static/v1?label=|&message=JAVASCRIPT&color=3c7f5d&style=plastic&logo=javascript) ![REACT BADGE](https://img.shields.io/static/v1?label=|&message=REACT&color=2b625f&style=plastic&logo=react.js) ![BOOTSTRAP BADGE](https://img.shields.io/static/v1?label=|&message=BOOTSRAP&color=purple&style=plastic&logo=bootstrap)</p>
 
 ## Optimizations
 

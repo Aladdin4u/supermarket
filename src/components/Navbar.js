@@ -24,7 +24,7 @@ export default function Navbar(props) {
   const links = [
     { link: "/", text: "Home" },
     { link: "/about", text: "About Us" },
-    { link: "/product", text: "Product" },
+    { link: "/products", text: "Product" },
   ];
 
   useEffect(() => {
@@ -59,30 +59,16 @@ export default function Navbar(props) {
       </NavLink>
       <div className="hide">
         <ul>
-          <li className="nav-item">
-            <NavLink
-              style={({ isActive }) => (isActive ? activeStyles : null)}
-              to="/"
-            >
-              Home
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              style={({ isActive }) => (isActive ? activeStyles : null)}
-              to="/about"
-            >
-              About us
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              style={({ isActive }) => (isActive ? activeStyles : null)}
-              to="/products"
-            >
-              Products
-            </NavLink>
-          </li>
+          {links.map((nav) => (
+            <li key={nav.text} className="nav-item">
+              <NavLink
+                style={({ isActive }) => (isActive ? activeStyles : null)}
+                to={nav.link}
+              >
+                {nav.text}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </div>
       <div className="hide">

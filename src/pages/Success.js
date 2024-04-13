@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
 
 const Success = () => {
-  useEffect(() => {
-    localStorage.removeItem("cart")
-  },[])
+  const app = useContext(AppContext);
+  app.clearProductFromCart();
+
   return (
     <>
       <h1>Thank you for your purchase!</h1>

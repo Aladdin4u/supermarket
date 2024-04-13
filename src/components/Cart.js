@@ -37,11 +37,6 @@ export default function Cart() {
         .then((response) => {
           // this will only log if the redirect did not work
           console.log(response.error);
-          // const saveToFirebase = FireBase.firestore();
-          // saveToFirebase.collection("todos").add({
-          //   id: uuid(),
-          //   item: input,
-          // });
         })
         .catch((error) => {
           // wrong API key? you will see the error message here
@@ -55,7 +50,7 @@ export default function Cart() {
       <div>
         <h1>Your Cart</h1>
         {cart.length === 0 && (
-          <p>You have not added any product to your cart yet.</p>
+          <p>You have not added any product to your cart yet. <Link to="/products">Return to shop</Link></p>
         )}
         {cart.length > 0 && (
           <>
@@ -97,6 +92,14 @@ export default function Cart() {
                   <th colSpan="2"></th>
                   <th className="cart-highlight">Total</th>
                   <th className="cart-highlight">${totalPrice}</th>
+                </tr>
+                <tr>
+                  <th colSpan="3"></th>
+                  <th className="cart-highlight">
+                    <Button style={{backgroundColor: "transparent", width: "100%"}} onClick={() => app.clearProductFromCart()}>
+                      Clear Cart
+                    </Button>
+                  </th>
                 </tr>
               </tfoot>
             </table>
