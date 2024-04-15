@@ -31,7 +31,7 @@ export default function Login() {
         formData.email,
         formData.password
       );
-      console.log(res.user)
+      
       const user = {
         id: res.user.uid,
         email: res.user.email

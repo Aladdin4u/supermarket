@@ -13,10 +13,12 @@ const stripeLoadedPromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 export default function Cart() {
   const app = useContext(AppContext);
   const { user } = useContext(AuthContext);
+  
+  const currentUser = user? user.email : ""
   const cart = app.cart;
   const totalPrice = app.getTotalPrice();
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(currentUser);
 
   function handleFormSubmit(event) {
     event.preventDefault();
@@ -24,7 +26,7 @@ export default function Cart() {
     const lineItems = cart.map((product) => {
       return { price: product.price_id, quantity: product.quantity };
     });
-
+    
     stripeLoadedPromise.then((stripe) => {
       stripe
         .redirectToCheckout({
