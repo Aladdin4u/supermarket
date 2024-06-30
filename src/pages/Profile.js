@@ -30,7 +30,7 @@ export default function Profile() {
         querySnapshot.forEach((doc) => {
           const datas = doc.data();
           const newData = {
-            id: `${doc.id}-${Math.random() * 8}`,
+            id: doc.id,
             desc: "product",
             receipt: datas.receipt_url,
             date: "2022-04-03T09:24:40.199Z",
@@ -43,7 +43,7 @@ export default function Profile() {
     };
 
     getTransactions();
-  }, []);
+  }, [user.id]);
 
   return (
     <div>

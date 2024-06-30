@@ -1,19 +1,19 @@
 import * as React from "react";
-import { Link  } from "react-router-dom";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 export default function TransactionTable({ rows }) {
-  const viewReceipt = (params) => {
-    console.log(params);
-    <Link to={params} target="_blank" />;
-  };
-
   const columns = React.useMemo(
     () => [
       { field: "id", headerName: "ID", minWidth: 70, hideable: true },
-      { field: "desc", headerName: "Description", minWidth: 130 },
-      { field: "date", headerName: "Date", type: 'date', minWidth: 130, valueFormatter: params => new Date(params).toLocaleString() },
+      { field: "desc", headerName: "Description", minWidth: 200 },
+      {
+        field: "date",
+        headerName: "Date",
+        type: "date",
+        minWidth: 300,
+        valueFormatter: (params) => new Date(params).toLocaleString(),
+      },
       {
         field: "receipt",
         type: "actions",
@@ -23,7 +23,7 @@ export default function TransactionTable({ rows }) {
           <GridActionsCellItem
             icon={<VisibilityIcon />}
             label="view"
-            onClick={() => console.log(params.row.receipt)}
+            onClick={() => (window.location.href = params.row.receipt)}
           />,
         ],
       },
